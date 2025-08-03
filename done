@@ -1,0 +1,45 @@
+#include <queue>
+#include <iostream>
+using namespace std;
+
+class Stack {
+    queue<int> q1, q2;  // q1 = holds the stack in top‑at‑front order
+
+public:
+    void push(int x) {
+        // Step 1: push to helper queue q2
+        q2.push(x);
+        // Step 2: move all elements from q1 → q2
+        while (!q1.empty()) {
+            q2.push(q1.front());
+            q1.pop();
+        }
+        // Step 3: swap so q1 now has new order, q2 becomes empty
+        swap(q1, q2);
+    }
+
+    void pop() {
+        if (!q1.empty()) q1.pop();
+    }
+
+    int top() const {
+        return q1.empty() ? -1 : q1.front();
+    }
+
+    bool empty() const {
+        return q1.empty();
+    }
+
+    size_t size() const {
+        return q1.size();
+    }
+};
+
+int main() {
+    Stack s;
+    s.push(10);
+    s.push(20);
+    cout << s.top() << " "; // → 20
+    s.pop();
+    cout << s.top();        // → 10
+}
