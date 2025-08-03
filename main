@@ -1,0 +1,12 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+bool isPalindromeReverse(const string& s) {
+    string rev(s.rbegin(), s.rend()); // build reverse copy
+    return s == rev;
+}
+
+int main() {
+    string s = "radar";
+    cout << boolalpha << isPalindromeReverse(s) << "\n";
+}
